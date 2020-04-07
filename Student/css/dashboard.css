@@ -1,0 +1,109 @@
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 5px 50px;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li {
+  float: left;
+  border-right:1px solid #bbb;
+  border-left:1px solid #bbb;
+}
+
+/*li:last-child {
+  border-right:1px solid #bbb;
+  border-left:1px solid #bbb;
+}*/
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: green;
+}
+
+.btn{
+  background-color:MediumSeaGreen;
+  border: none;
+  font-weight: bold;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.btn {
+  -webkit-transition-duration: 0.4s; /* Safari */
+   transition-duration: 0.4s;
+   
+}
+
+.btn:hover {
+  background-color: lightgreen; /* Green */
+  color: white;
+}
+
+.abcd{
+  overflow: hidden;
+  background-color: #ededed;
+  margin-top:100px;
+  margin-left: 300px;
+  margin-right: 400px;
+}
+
+.chlab{
+margin-top:30px;
+float: left;
+}
+
+.chlab p{
+text-align: center;
+font-size: 30px;
+font-weight: bold;
+color: blue;
+padding-left:50px;
+padding-top: 2px;
+padding-bottom: 20px;
+}
+
+.efgh{
+  margin-top:30px;
+  float: right;
+  padding-right: 100px;
+  padding-top:20px;
+}
+
+.btn2{
+  background-color:black;
+  border: none;
+  font-weight: bold;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+.btn2{
+  -webkit-transition-duration: 0.4s; /* Safari */
+   transition-duration: 0.4s;
+   
+}
+
+.btn2:hover {
+  background-color: darkgray; /* Green */
+  color: white;
+}

@@ -1,0 +1,306 @@
+#include <iostream>
+ 
+using namespace std;
+ 
+// A function to merge the two half into a sorted data.
+void Merge(int *a, int low, int high, int mid)
+{
+	// We have low to mid and mid+1 to high already sorted.
+	int i, j, k, temp[high-low+1];
+	i = low;
+	k = 0;
+	j = mid + 1;
+ 
+	// Merge the two parts into temp[].
+	while (i <= mid && j <= high)
+	{
+		if (a[i] < a[j])
+		{
+			temp[k] = a[i];
+			k++;
+			i++;
+		}
+		else
+		{
+			temp[k] = a[j];
+			k++;
+			j++;
+		}
+	}
+ 
+	// Insert all the remaining values from i to mid into temp[].
+	while (i <= mid)
+	{
+		temp[k] = a[i];
+		k++;
+		i++;
+	}
+ 
+	// Insert all the remaining values from j to high into temp[].
+	while (j <= high)
+	{
+		temp[k] = a[j];
+		k++;
+		j++;
+	}
+ 
+ 
+	// Assign sorted data stored in temp[] to a[].
+	for (i = low; i <= high; i++)
+	{
+		a[i] = temp[i-low];
+	}
+}
+ 
+// A function to split array into two parts.
+void MergeSort(int *a, int low, int high)
+{
+	int mid;
+	if (low < high)
+	{
+		mid=(low+high)/2;
+		// Split the data into two half.
+		MergeSort(a, low, mid);
+		MergeSort(a, mid+1, high);
+ 
+		// Merge them to get sorted output.
+		Merge(a, low, high, mid);
+	}
+}
+ 
+int main()
+{
+	int n, i;
+	cin>>n;
+ 
+	int arr[n];
+	for(i = 0; i < n; i++)
+	{
+		cin>>arr[i];
+	}
+ 
+	MergeSort(arr, 0, n-1);
+ 
+	// Printing the sorted data.
+	for (i = 0; i < n; i++)
+     {
+         cout<<arr[i]<<" ";
+     }
+ 
+	return 0;
+}
+
+
+
+
+
+#include<stdlib.h> 
+#include<stdio.h> 
+
+// Merges two subarrays of arr[]. 
+// First subarray is arr[l..m] 
+// Second subarray is arr[m+1..r] 
+void merge(int arr[], int l, int m, int r) 
+{ 
+	int i, j, k; 
+	int n1 = m - l + 1; 
+	int n2 = r - m; 
+
+	/* create temp arrays */
+	int L[n1], R[n2]; 
+
+	/* Copy data to temp arrays L[] and R[] */
+	for (i = 0; i < n1; i++) 
+		L[i] = arr[l + i]; 
+	for (j = 0; j < n2; j++) 
+		R[j] = arr[m + 1+ j]; 
+
+	/* Merge the temp arrays back into arr[l..r]*/
+	i = 0; // Initial index of first subarray 
+	j = 0; // Initial index of second subarray 
+	k = l; // Initial index of merged subarray 
+	while (i < n1 && j < n2) 
+	{ 
+		if (L[i] <= R[j]) 
+		{ 
+			arr[k] = L[i]; 
+			i++; 
+		} 
+		else
+		{ 
+			arr[k] = R[j]; 
+			j++; 
+		} 
+		k++; 
+	} 
+
+	/* Copy the remaining elements of L[], if there 
+	are any */
+	while (i < n1) 
+	{ 
+		arr[k] = L[i]; 
+		i++; 
+		k++; 
+	} 
+
+	/* Copy the remaining elements of R[], if there 
+	are any */
+	while (j < n2) 
+	{ 
+		arr[k] = R[j]; 
+		j++; 
+		k++; 
+	} 
+} 
+
+/* l is for left index and r is right index of the 
+sub-array of arr to be sorted */
+void mergeSort(int arr[], int l, int r) 
+{ 
+	if (l < r) 
+	{ 
+		// Same as (l+r)/2, but avoids overflow for 
+		// large l and h 
+		int m = l+(r-l)/2; 
+    
+		// Sort first and second halves 
+		mergeSort(arr, l, m); 
+		mergeSort(arr, m+1, r); 
+
+		merge(arr, l, m, r); 
+
+	} 
+} 
+
+
+/* Driver program to test above functions */
+int main() 
+{ 
+	int n,h;
+	scanf("%d",&n);
+	int * arr = (int*)malloc(sizeof(int)*n); // allocate the memory for your array
+
+    for(int j = 0; j < n; j++){
+        scanf("%d", &h);
+        *(arr+j) = h;
+    }
+	mergeSort(arr, 0, n-1);
+ 
+	// Printing the sorted data.
+	for (int i = 0; i < n; i++)
+     {
+         printf("%d",arr[i]);
+         if(i!=n-1)
+         {
+             printf(" ");
+         }
+     } 
+	return 0; 
+} 
+
+
+/* Java program for Merge Sort */
+import java.util.Scanner;
+class Main
+{ 
+	// Merges two subarrays of arr[]. 
+	// First subarray is arr[l..m] 
+	// Second subarray is arr[m+1..r] 
+	void merge(int arr[], int l, int m, int r) 
+	{ 
+		// Find sizes of two subarrays to be merged 
+		int n1 = m - l + 1; 
+		int n2 = r - m; 
+
+		/* Create temp arrays */
+		int L[] = new int [n1]; 
+		int R[] = new int [n2]; 
+
+		/*Copy data to temp arrays*/
+		for (int i=0; i<n1; ++i) 
+			L[i] = arr[l + i]; 
+		for (int j=0; j<n2; ++j) 
+			R[j] = arr[m + 1+ j]; 
+
+
+		/* Merge the temp arrays */
+
+		// Initial indexes of first and second subarrays 
+		int i = 0, j = 0; 
+
+		// Initial index of merged subarry array 
+		int k = l; 
+		while (i < n1 && j < n2) 
+		{ 
+			if (L[i] <= R[j]) 
+			{ 
+				arr[k] = L[i]; 
+				i++; 
+			} 
+			else
+			{ 
+				arr[k] = R[j]; 
+				j++; 
+			} 
+			k++; 
+		} 
+
+		/* Copy remaining elements of L[] if any */
+		while (i < n1) 
+		{ 
+			arr[k] = L[i]; 
+			i++; 
+			k++; 
+		} 
+
+		/* Copy remaining elements of R[] if any */
+		while (j < n2) 
+		{ 
+			arr[k] = R[j]; 
+			j++; 
+			k++; 
+		} 
+	} 
+
+	// Main function that sorts arr[l..r] using 
+	// merge() 
+	void sort(int arr[], int l, int r) 
+	{ 
+		if (l < r) 
+		{ 
+			// Find the middle point 
+			int m = (l+r)/2; 
+
+			// Sort first and second halves 
+			sort(arr, l, m); 
+			sort(arr , m+1, r); 
+
+			// Merge the sorted halves 
+			merge(arr, l, m, r); 
+		} 
+	} 
+
+	// Driver method 
+	public static void main(String args[]) 
+	{ 
+		int n;
+        Scanner s = new Scanner(System.in);
+        n = s.nextInt();
+        int arr[] = new int[n];
+        for(int i = 0; i < n; i++)
+        {
+            arr[i] = s.nextInt();
+        }
+
+		Main ob = new Main(); 
+		ob.sort(arr, 0, arr.length-1); 
+		for (int i = 0; i < n; i++)
+		{
+			System.out.print(arr[i]);
+			if(i!=n-1)
+			{
+				System.out.print(" ");
+			}
+		}  
+	} 
+}
